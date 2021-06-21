@@ -136,8 +136,8 @@ function drawPath() {
     endShape();
 }
 
-function toggleRun(isRunning = true) {
-    run = isRunning;
+function toggleRun(isRunning) {
+    run = isRunning ? isRunning : !run;
     if (run) {
         select("#doRun").html('Stop 🤚').addClass('active');
     } else {
