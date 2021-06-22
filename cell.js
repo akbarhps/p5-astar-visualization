@@ -4,7 +4,7 @@
  * https://www.github.com/akbarhps
  */
 
-function Cell(y, x, obstacleChance = 0.5) {
+function Cell(y, x, obstacleChance = 0.4) {
     this.y = y;
     this.x = x;
     this.isObstacle = Math.random() < obstacleChance;
