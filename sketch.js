@@ -34,6 +34,7 @@ function resetProgress() {
     openSet = [];
     closedSet = [];
     path = [];
+    currentCell = undefined;
 
     startCell = grid[0][0];
     targetCell = grid[gridRows - 1][gridColumns - 1];
@@ -62,7 +63,9 @@ function toggleDiagonalMove() {
     if (diagonalMove) {
         select("#diagonalMove").html('Diagonal Move ✔').addClass('active');
         if (openSet.length === 0) {
-           openSet.push(currentCell);
+            openSet.push(currentCell);
+            removeElementFromArray(closedSet, currentCell);
+            drawLayout();
         }
     } else {
         select("#diagonalMove").html('Diagonal Move ❌').removeAttribute('class');
@@ -76,7 +79,7 @@ function doStep() {
     }
 
     currentCell = findLowestMovementCost();
-    removeElementFromOpenSet(currentCell);
+    removeElementFromArray(openSet, currentCell);
     closedSet.push(currentCell);
 
     for (let neighbor of currentCell.findNeighbors()) {
@@ -145,9 +148,8 @@ function toggleRun(isRunning) {
     }
 }
 
-function removeElementFromOpenSet(element) {
-    let index = openSet.indexOf(element);
-    openSet.splice(index, 1);
+function removeElementFromArray(array, element) {
+    array.splice(array.indexOf(element), 1);
 }
 
 function findLowestMovementCost() {
